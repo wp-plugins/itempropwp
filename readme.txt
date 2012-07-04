@@ -12,7 +12,8 @@ Adding schema.org itemprop to images
 
 == Description ==
 
-Adding schema.org itemprop to images (post thumbnails!).
+Adding schema.org itemprop to images (post thumbnails!) [codex the_post_thumbnail()](http://codex.wordpress.org/Function_Reference/the_post_thumbnail).
+
 
 `<img src="janedoe.jpg" itemprop="image" />`
 
