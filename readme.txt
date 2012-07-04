@@ -12,11 +12,11 @@ Adding schema.org itemprop to images
 
 == Description ==
 
-Adding schema.org itemprop to images.
+Adding schema.org itemprop to images (post thumbnails!).
 
 `<img src="janedoe.jpg" itemprop="image" />`
 
-[Project Page](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/) | [Git](https://bitbucket.org/simplemediacode/itempropwp) | [Documentation](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/)
+[Project Page](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/) | [Git](https://bitbucket.org/simplemediacode/itempropwp) | [Documentation](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/) | [SMC Facebook](http://www.facebook.com/pages/SimpleMediaCode/125547717479727)
 
 This plugin is very simple. It doesn't use database, just searching on front-end images in posts and adding `itemprop="image"`
 
