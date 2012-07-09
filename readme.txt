@@ -8,11 +8,11 @@ Stable tag: 1.0
 License: simplemediacode
 License URI: http://simplemediacode.com/license/gpl/
 
-Adding schema.org itemprop to images
+Add human invisible schema.org itemprop code to images
 
 == Description ==
 
-Adding schema.org itemprop to images (post thumbnails!) [codex the_post_thumbnail()](http://codex.wordpress.org/Function_Reference/the_post_thumbnail).
+Add human invisible schema.org itemprop code to images (post thumbnails!) [codex the_post_thumbnail()](http://codex.wordpress.org/Function_Reference/the_post_thumbnail).
 
 
 `<img src="janedoe.jpg" itemprop="image" />`
