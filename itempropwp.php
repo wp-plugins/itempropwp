@@ -1,6 +1,6 @@
 <?php 
 /**
- * Plugin Name: itemprop WP
+ * Plugin Name: itemprop WP for SEO Rich snippets
  * Plugin URI: http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-1-0-itempropWP_load_widgets
  * Description: Add human invisible schema.org itemprop code to images
  * Version: 1.1
