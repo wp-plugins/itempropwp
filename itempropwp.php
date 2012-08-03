@@ -3,7 +3,7 @@
  * Plugin Name: itemprop WP
  * Plugin URI: http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-1-0-itempropWP_load_widgets
  * Description: Add human invisible schema.org itemprop code to images
- * Version: 1.0
+ * Version: 1.1
  * Requires at least: 3.3
  * Tested up to: 3.4.1
  * Author: Rolands Umbrovskis
@@ -14,11 +14,11 @@
 
 
 
-define('SMCIPWPV','1.0'); // location general @since 1.0
+define('SMCIPWPV','1.1'); // location general @since 1.0
 define('SMCIPWPM',dirname(__FILE__)); // location general @since 1.0
 define('SMCIPWPF','itempropwp'); // location folder @since 1.0
 define('SMCIPWPURL', plugin_dir_url(__FILE__)); // Image location @since 1.0
-define('SMCIPWPI',WPDRAUGIEMURL.'/img'); // Image location @since 1.0
+define('SMCIPWPI',SMCIPWPURL.'/img'); // Image location @since 1.0
 define('SMCIPWPORG','http://wordpress.org/extend/plugins/'.SMCIPWPF); // Image location @since 1.0
 
 add_filter('post_thumbnail_html','smc_ipwp_image_itemprop',10,3 );

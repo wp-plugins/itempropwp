@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Z4ALL
 Tags: SEO, schema, schema.org, itemprop, schema.org itemprop, images
 Requires at least: 3.3
 Tested up to: 3.4.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: simplemediacode
 License URI: http://simplemediacode.com/license/gpl/
 
@@ -14,8 +14,7 @@ Add human invisible schema.org itemprop code to images
 
 Add human invisible schema.org itemprop code to images (post thumbnails!) [codex the_post_thumbnail()](http://codex.wordpress.org/Function_Reference/the_post_thumbnail).
 
-
-`<img src="janedoe.jpg" itemprop="image" />`
+`<img src="http://example.com/janedoe.jpg" itemprop="image" />`
 
 [Project Page](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/) | [Git](https://bitbucket.org/simplemediacode/itempropwp) | [Documentation](http://simplemediacode.info/snippets/add-itemprop-image-to-all-wordpress-images/) | [SMC Facebook](http://www.facebook.com/pages/SimpleMediaCode/125547717479727)
 
@@ -37,10 +36,13 @@ There are no questions for now! [Ask!](http://simplemediacode.info/snippets/add-
 
 == Changelog ==
 
+= 1.1 =
+* fix: SMCIPWPURL
+
 = 1.0 =
 * init
 
 == Upgrade Notice ==
 
-= 1.0 =
-* init
+= 1.1 =
+* fix: SMCIPWPURL
