@@ -37,7 +37,7 @@ There are no questions for now! [Ask!](http://simplemediacode.info/snippets/item
 == Changelog ==
 
 = 2.0 =
-* all new. Rewitten from ground.
+* new code
 * now as extendable class function
 * new: using WordPress filter for image attributed on thumbnails
 
