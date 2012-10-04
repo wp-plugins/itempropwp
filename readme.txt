@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Z4ALL
 Tags: SEO, schema, schema.org, itemprop, schema.org itemprop, images, microdata, rich snippets, richsnippets, SERP, html5, structured data
 Requires at least: 3.3
 Tested up to: 3.4.2
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: simplemediacode
 License URI: http://simplemediacode.com/license/gpl/
 
@@ -18,7 +18,7 @@ Example output:
 
 `
 <span itemscope itemtype="http://schema.org/Article">
-<!-- Itemprop WP 3.1.2 by Rolands Umbrovskis http://umbrovskis.com -->
+<!-- Itemprop WP 3.1.3 by Rolands Umbrovskis http://umbrovskis.com -->
  <meta itemprop="name" content="Title of the Article" />
  <meta itemprop="url" content="http://example.com/seo-optimized-article/" />
  <meta itemprop="image" content="http://example.com/images/example.jpg" />
@@ -26,14 +26,27 @@ Example output:
  <meta itemprop="description" content="excerpt from post" />
  <meta itemprop="datePublished" content="2012-09-13 19:17:21" />
  <meta itemprop="interactionCount" content="UserComments:356" />
-<!-- Itemprop WP 3.1.2 by Rolands Umbrovskis http://umbrovskis.com end -->
+<!-- Itemprop WP 3.1.3 by Rolands Umbrovskis http://umbrovskis.com end -->
 </span>
 `
 
-NEW in 3.1.2
+= How does it work? =
 
-* itemprop="description" fix
-* todo: finish fix for description part
+There are no options. yet!
+
+This asumes that Yout page is not fully integrated with HTML5's data properties for microdata. This plugin will create small code inside Your full content, with extra microdata from schema.org. This will be ONLY on singular pages - post, page or your custom post type.
+
+Once we are on singular page:
+
+# we will extract from it EXCERPT.
+# If You haven't provided excerpt, plugin will look-up for post content, and downsize it to 170 symbols up to full word.
+# If your content consist ONLY of shortcode, it will strip it out, and leave empty content. :(
+# If we have empty content, from previous step, we will use post title. Not best choise, but at least we have some `description`.
+# If Your post do not have even title, plugin will giveup and your description will be ampty. (This ir very bad :') )
+
+Other options, like `datePublished`, `UserComments`, `url` are taken from post
+
+
 
 NEW in 3.1
 
@@ -71,6 +84,10 @@ There are no questions for now! [Ask!](http://simplemediacode.info/snippets/item
 
 == Changelog ==
 
+= 3.1.3 =
+
+* fixed: itemprop="description"
+
 = 3.1.2 =
 
 * fix: itemprop="description"
@@ -101,6 +118,10 @@ There are no questions for now! [Ask!](http://simplemediacode.info/snippets/item
 * init
 
 == Upgrade Notice ==
+
+= 3.1.3 =
+
+* new: itemprop="description"
 
 = 2.0 =
 * new: as extendable class function
