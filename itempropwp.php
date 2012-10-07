@@ -3,7 +3,7 @@
 Plugin Name: itemprop WP for SERP/SEO Rich snippets
 Plugin URI: http://simplemediacode.com/wordpress-pugins/itemprop-wp/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-3-1-4-itempropWP_load_widgets
 Description: Add human invisible schema.org itemprop code to images
-Version: 3.1.3
+Version: 3.1.4
 Requires at least: 3.3
 Tested up to: 3.5
 Author: Rolands Umbrovskis
