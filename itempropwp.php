@@ -1,9 +1,9 @@
 <?php 
 /**
 Plugin Name: itemprop WP for SERP (and SEO) Rich snippets
-Plugin URI: http://simplemediacode.com/wordpress-pugins/itemprop-wp/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-3.3.3-itempropWP_load_widgets
+Plugin URI: http://simplemediacode.com/wordpress-pugins/itemprop-wp/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-3.3.4-itempropWP_load_widgets
 Description: Add human invisible schema.org code to conent
-Version: 3.3.3
+Version: 3.3.4
 Requires at least: 3.3
 Tested up to: 3.5
 Author: Rolands Umbrovskis
@@ -14,7 +14,7 @@ License URI: http://simplemediacode.com/license/gpl/
 Copyright (C) 2008-2013, Rolands Umbrovskis - rolands@simplemediacode.com
 
 */
-	define('SMCIPWPV','3.3.3'); // location general @since 1.0
+	define('SMCIPWPV','3.3.4'); // location general @since 1.0
 	define('SMCIPWPM',dirname(__FILE__)); // location general @since 1.0
 	define('SMCIPWPF','itempropwp'); // location folder @since 1.0 
 	define('IPWPT',__('itemprop WP for SERP/SEO Rich snippets','itempropwp')); // Name @since 1.1
@@ -175,6 +175,17 @@ new itempropwp;
 			return apply_filters('ipwp_post_imguri', $theimage);
 		}
 		public function ipwp_the_content_filter($content) {
+
+/*
+Content loading multiple times. patch by sirene http://simplemediacode.org/forums/topic/schema-display-3-times/#post-97
+Now, the $ipwp_contentx is loading just one time and not multiple time if you have more than one the_content(); in your page
+@author sirene
+@date 2013-02-18
+@version 1.0.0
+@since 3.3.4
+*/
+			static $done_ipwp_post = FALSE; /* @since 3.3.4 */
+			
 			if (is_singular() && !is_feed()){
 				global $post;
 				$post_id = $post->ID;
@@ -191,13 +202,9 @@ new itempropwp;
 					if ( has_post_thumbnail($post_id)) {
 						$itempropwpimg = new itempropwp;
 						$ipwp_posth = $itempropwpimg->itempropwp_get_image_path($post_id);
-						// removed @since 3.3.2 replaced with  itemprop_get_image_path()
-						//$ipwp_post_imga = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full'); // all other sizes are not permanent :| 
-						//$ipwp_posth = apply_filters('ipwp_post_imguri', $ipwp_post_imga[0]); // image link + Extending @since 3.1
 					}
 				}
-				
-				
+
 				if($ipwp_posth){
 					$ipwp_image = '<meta itemprop="image" content="'.esc_url($ipwp_posth).'" />';
 				}
@@ -211,26 +218,39 @@ new itempropwp;
 					$showcommcount = '<meta itemprop="interactionCount" content="UserComments:'.esc_attr($thisipwp_post->comment_count).'" />';
 				}
 				if($ipwpdatemodified=='on'){
-					$ipwp_datemodified= '<meta itemprop="dateModified" content="'.esc_attr($thisipwp_post->post_modified).'" />';
+					$ipwp_datemodified= '<meta itemprop="dateModified" content="'.esc_attr(apply_filters('itempropwp_article_post_modified', $thisipwp_post->post_modified)).'" />'; /* @since 3.3.4 */
 				}
 				
 				$smcipwp_author_link = get_option('smcipwp_author_link'); /* Per post options @since 3.3.0 */
 				if($smcipwp_author_link==''){
-					$smcipwp_author_link = get_author_posts_url($thisipwp_post->post_author);
+					$smcipwp_author_link = get_author_posts_url(apply_filters('itempropwp_article_post_author', $thisipwp_post->post_author)); /* @since 3.3.4 */
 				}
 				$postauthoris = esc_url($smcipwp_author_link);
 				
 				$ipwp_contentx = apply_filters('itempropwp_article_content_before','<span itemscope itemtype="http://schema.org/Article" class="itempropwp-wrap"><!-- ItemProp WP '.SMCIPWPV.' by Rolands Umbrovskis http://umbrovskis.com/ --><meta itemprop="name" content="'.esc_attr($thisipwp_post->post_title).'"><meta itemprop="url" content="'.esc_url(get_permalink()).'">'
-	.$ipwp_image.'<meta itemprop="author" content="'.$postauthoris.'"><meta itemprop="description" content="'.strip_tags(str_replace(array("\r\n", "\n", "\r", "\t"), "", $ipwp_post_dsc)).'"><meta itemprop="datePublished" content="'.esc_attr($thisipwp_post->post_date).'">'
-	.$ipwp_datemodified
-	.$showcommcount.'<!-- ItemProp WP '.SMCIPWPV.' by Rolands Umbrovskis http://umbrovskis.com/ end --></span>');
+				.$ipwp_image.'<meta itemprop="author" content="'.$postauthoris.'"><meta itemprop="description" content="'.strip_tags(str_replace(array("\r\n", "\n", "\r", "\t"), "", $ipwp_post_dsc)).'"><meta itemprop="datePublished" content="'.esc_attr($thisipwp_post->post_date).'">'
+				.$ipwp_datemodified
+				.$showcommcount.'<!-- ItemProp WP '.SMCIPWPV.' by Rolands Umbrovskis http://umbrovskis.com/ end --></span>');
 
-				$content = $content.$ipwp_contentx;
-				$content = apply_filters('itempropwp_article_content', $content);
+				if ( $done_ipwp_post ){ /* @since 3.3.4 */
+					return $content;
+				}else{
+					$content = $content.$ipwp_contentx;
+					$content = apply_filters('itempropwp_article_content', $content);  /* @since 3.3.4 */
+					$done_ipwp_post = TRUE;
+				}
 				
-				return $content;
+				do_action('ipwp_post_before_content_end'); /* @since 3.3.4 */
+				//return $content;
+				return apply_filters('itempropwp_article_content_distilled', $content); /* @since 3.3.4 */
+				do_action('ipwp_post_after_content_end'); /* @since 3.3.4 */
 			}
-			return $content;
+			
+			do_action('ipwp_post_before_end'); /* @since 3.3.4 */
+			$done_ipwp_post = TRUE; /* @since 3.3.4 */
+			//return $content;
+			return apply_filters('itempropwp_article_content_undistilled', $content); /* @since 3.3.4 */
+			do_action('ipwp_post_after_end'); /* @since 3.3.4 */
 		}
 	
 	}
