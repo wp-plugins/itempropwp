@@ -14,7 +14,7 @@ License URI: http://simplemediacode.com/license/gpl/
 Copyright (C) 2008-2013, Rolands Umbrovskis - rolands@simplemediacode.com
 
 */
-	define('SMCIPWPV','3.3.6'); // location general @since 1.0
+	define('SMCIPWPV','3.4.0'); // location general @since 1.0
 	define('SMCIPWPM',dirname(__FILE__)); // location general @since 1.0
 	define('SMCIPWPF','itempropwp'); // location folder @since 1.0 
 	define('IPWPT',__('itemprop WP for SERP/SEO Rich snippets','itempropwp')); // Name @since 1.1
@@ -212,7 +212,11 @@ Now, the $ipwp_contentx is loading just one time and not multiple time if you ha
 	
 				if(!$ipwp_post_dsc){
 					$ipwp_n = new itempropwp;
-					$ipwp_post_dsc = apply_filters('ipwp_post_dsc', $ipwp_n->ipwp_excerpt_maxchr(get_option('smcipwp_maxlenght'), strip_shortcodes($thisipwp_post->post_content) )); // Extending @since 3.1
+					$ipwp_post_dsc = apply_filters(
+						'ipwp_post_dsc',
+						$ipwp_n->ipwp_excerpt_maxchr(get_option('smcipwp_maxlenght'),
+						strip_tags( strip_shortcodes( $thisipwp_post->post_content) ) )
+					); // Extending @since 3.1
 				}
 				
 				if(get_option('smcipwp_showcommcount')=='on'){
