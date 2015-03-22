@@ -4,7 +4,7 @@ Donate link: http://go.mediabox.lv/itempropwpdonatepaypal
 Tags: SEO, schema, schema.org, itemprop, schema.org itemprop, images, microdata, rich snippets, richsnippets, SERP, html5, structured data, itemprop article, itemprop review
 Requires at least: 3.3
 Tested up to: 4.1.1
-Stable tag: 3.4.3
+Stable tag: 3.4.4
 License: simplemediacode
 License URI: http://simplemediacode.com/license/gpl/
 
@@ -14,22 +14,22 @@ Add schema.org itemprop code to the (custom) post content for search engines and
 
 This plugin is very simple. Using WordPress built in function to filter element attributes and adding < meta > tags with schema.org item properties.
 
-[Project itempropWP homepage](http://simplemediacode.com/?utm_source=http://wordpress.org/extend/plugins/itempropwp/&utm_medium=link&utm_campaign=itempropWP-WordPress-theme-feature-requests-3.4.3&utm_content=WordPress-plugin-itempropwp-3.4.3)
+[Project itempropWP homepage](http://simplemediacode.com/?utm_source=http://wordpress.org/extend/plugins/itempropwp/&utm_medium=link&utm_campaign=itempropWP-WordPress-theme-feature-requests-3.4.4&utm_content=WordPress-plugin-itempropwp-3.4.4)
 
 Example output:
 
 `
 <span itemscope itemtype="http://schema.org/Article" class="itempropwp-wrap">
-<!-- Itemprop WP 3.4.3 by Rolands Umbrovskis http://umbrovskis.com -->
+<!-- Itemprop WP 3.4.4 by Rolands Umbrovskis http://umbrovskis.com -->
  <meta itemprop="name" content="Title of the Article" />
  <meta itemprop="url" content="http://example.com/seo-optimized-article/" />
  <meta itemprop="image" content="http://example.com/images/example.jpg" />
  <meta itemprop="author" content="http://example.com/author/authorusername/"/>
  <meta itemprop="description" content="excerpt from post" />
- <meta itemprop="datePublished" content="2012-09-13 19:17:21" />
- <meta itemprop="dateModified" content="2012-09-29 13:33:25" />
+ <meta itemprop="datePublished" content="2014-09-13 19:17:21" />
+ <meta itemprop="dateModified" content="2015-01-29 13:33:25" />
  <meta itemprop="interactionCount" content="UserComments:356" />
-<!-- Itemprop WP 3.4.3 by Rolands Umbrovskis http://umbrovskis.com end -->
+<!-- Itemprop WP 3.4.4 by Rolands Umbrovskis http://umbrovskis.com end -->
 </span>
 `
 
@@ -76,7 +76,7 @@ Once we are on singular page:
 
 Other options, like `datePublished`, `dateModified` (if enabled), `UserComments` (if enabled), `url` are taken from post
 
-* [SMC Facebook](http://www.facebook.com/pages/SimpleMediaCode/125547717479727)
+* [SMC Facebook](https://www.facebook.com/simplemediacode)
 
 Development: [Github](https://github.com/rolandinsh/itempropwp)
 
@@ -95,6 +95,10 @@ Require PHP at least 5.3
 There are no questions for now! [Ask!](http://simplemediacode.com/wordpress-pugins/itemprop-wp/)
 
 == Changelog ==
+
+= 3.4.4 =
+
+* Typo fix in plugin's description
 
 = 3.4.3 =
 
@@ -189,6 +193,10 @@ There are no questions for now! [Ask!](http://simplemediacode.com/wordpress-pugi
 * init
 
 == Upgrade Notice ==
+
+= 3.4.4 =
+
+* Typo fix in plugin's description
 
 = 3.4.3 =
 
