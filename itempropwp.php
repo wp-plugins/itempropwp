@@ -1,11 +1,11 @@
 <?php
 /**
   Plugin Name: itemprop WP for SERP (and SEO) Rich snippets
-  Plugin URI: http://simplemediacode.com/wordpress-pugins/itemprop-wp/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-3.4.4-itempropWP_load_widgets
+  Plugin URI: http://simplemediacode.com/?utm_source=wordpress&utm_medium=wpplugin&utm_campaign=itempropWP&utm_content=v-3.4.6-itempropWP_load_widgets
   Description: Add human invisible schema.org code to content
-  Version: 3.4.4
+  Version: 3.4.6
   Requires at least: 3.3
-  Tested up to: 4.1.1
+  Tested up to: 4.2.2
   Author: Rolands Umbrovskis
   Author URI: http://umbrovskis.com
   License: simplemediacode
@@ -14,7 +14,19 @@
   Copyright (C) 2008-2015, Rolands Umbrovskis - rolands@simplemediacode.com
 
  */
-define('SMCIPWPV', '3.4.4'); // location general @since 1.0
+
+/* 
+ * Simple check for WordPress. Make sure we don't expose any info if called directly
+ * @since 3.4.6
+ * @version 1.0.0
+ */
+if ( !function_exists( 'add_action' ) ) {
+    header('Status: 403 Forbidden');
+    header('HTTP/1.1 403 Forbidden');
+    exit();
+}
+/* some old fashion constants */
+define('SMCIPWPV', '3.4.6'); // location general @since 1.0
 define('SMCIPWPM', dirname(__FILE__)); // location general @since 1.0
 define('SMCIPWPF', 'itempropwp'); // location folder @since 1.0 
 define('IPWPT', __('itemprop WP for SERP/SEO Rich snippets', 'itempropwp')); // Name @since 1.1
@@ -25,7 +37,7 @@ $smcipwp_url = SMCIPWPURL; // @since 3.1 Use of undefined constant SMCIPWPURL - 
 $smcipwp_f = SMCIPWPF; // @since 3.1 Use of undefined constant SMCIPWPF - assumed 'SMCIPWPF' in 
 
 define('SMCIPWPI', trailingslashit($smcipwp_url . '/img')); // Image location @since 1.0
-define('SMCIPWPORG', 'http://wordpress.org/extend/plugins/' . trailingslashit($smcipwp_f)); // Plugin on WordPress.org @since 1.0
+define('SMCIPWPORG', 'https://wordpress.org/plugins/' . trailingslashit($smcipwp_f)); // Plugin on WordPress.org @since 1.0
 
 /** Plugin homepage based on WP language
  * @since 3.1.4
@@ -33,19 +45,18 @@ define('SMCIPWPORG', 'http://wordpress.org/extend/plugins/' . trailingslashit($s
 $plugref = '?utm_campaign=' . SMCIPWPF . '&utm_content=' . SMCIPWPF . '-' . SMCIPWPV . '&utm_medium=link&utm_source=' . SMCIPWPF . '-plugin';
 switch (WPLANG) {
     case 'lv':
-        define('IPWPT_HOMEPAGE', 'http://simplemediacode.com/wordpress-pugins/itemprop-wp/' . $plugref); // Homepage @since 3.1.4
-        define('IPWPT_HOMEPAGEC', 'http://simplemediacode.com/wordpress-pugins/itemprop-wp/'); // Homepage @since 3.3.0
+        define('IPWPT_HOMEPAGE', 'http://simplemediacode.com/' . $plugref); // Homepage @since 3.1.4
+        define('IPWPT_HOMEPAGEC', 'http://simplemediacode.com/'); // Homepage @since 3.3.0
         break;
 
     default:
-        define('IPWPT_HOMEPAGE', 'http://simplemediacode.com/wordpress-pugins/itemprop-wp/' . $plugref); // Homepage @since 3.1
-        define('IPWPT_HOMEPAGEC', 'http://simplemediacode.com/wordpress-pugins/itemprop-wp/'); // Homepage @since 3.3.0
+        define('IPWPT_HOMEPAGE', 'http://simplemediacode.com/' . $plugref); // Homepage @since 3.1
+        define('IPWPT_HOMEPAGEC', 'http://simplemediacode.com/'); // Homepage @since 3.3.0
         break;
 }
 
-define('IPWPT_GITHUB', 'https://github.com/rolandinsh/' . $smcipwp_f); // Homepage @since 3.1
-define('IPWPT_BITBUCKET', 'https://bitbucket.org/simplemediacode/' . $smcipwp_f); // Homepage @since 3.1
-define('IPWPT_VERSUPPORT', 'http://simplemediacode.org/forums/topic/itempropwp-3-3-0/' . $plugref); // Version specific support @since 3.3.0
+define('IPWPT_GITHUB', 'https://github.com/rolandinsh/' . $smcipwp_f); // Homepage @since 3.1 
+//define('IPWPT_VERSUPPORT', 'http://simplemediacode.org/forums/topic/itempropwp-3-3-0/' . $plugref); // Version specific support @since 3.3.0
 
 /*
  * itempropwp class
@@ -57,8 +68,8 @@ class itempropwp
 
     public function __construct()
     {
-        add_action('init', array($this, 'init'), 10);
-        add_action('plugin_row_meta', array($this, 'smcwpd_set_plugin_meta'), 10, 2);
+        add_action('init', array($this, 'init'), 11);
+        add_action('plugin_row_meta', array($this, 'smcwpd_set_plugin_meta'), 11, 2);
     }
 
     // Initialize
@@ -79,7 +90,7 @@ class itempropwp
          * @version 1.0
          */
         if (!is_admin()):
-            wp_register_style('itempropwp', SMCIPWPURL . 'assets/css/itempropwp.css', array(), SMCIPWPV, 'all');
+            wp_register_style('itempropwp', SMCIPWPURL . 'assets/css/itempropwp.css', false, SMCIPWPV, 'all');
             wp_enqueue_style('itempropwp');
         endif;
 
@@ -94,7 +105,7 @@ class itempropwp
         if ($file == $plugin) {
             return array_merge($links, array(
                 //'<a href="http://simplemediacode.org/forums/forum/itempropwp-plugin/">' . __("Support Forum","itempropwp") . '</a>',
-                '<a href="' . IPWPT_VERSUPPORT . '">' . sprintf(__("Support for version %s", "itempropwp"), SMCIPWPV) . '</a>',
+               // '<a href="' . IPWPT_VERSUPPORT . '">' . sprintf(__("Support for version %s", "itempropwp"), SMCIPWPV) . '</a>',
                     //'<a href="http://simplemediacode.org/forums/forum/itempropwp-plugin/suggestions-for-itempropwp/">' . __('Feature request') . '</a>',
                     // '<a href="http://simplemediacode.org/forums/forum/itempropwp-plugin/">' . __("Join Members group","itempropwp") . '</a>',
             ));
